@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: busybox
+  namespace: training
+spec:
+  replica: 1
+  selector:
+    matchLabels:
+      app: busybox
+  template:
+    metadata:
+      labels:
+        # This label is used as a selector in Service definition
+        app: busybox
+    spec:
+      containers:
+      - name: busybox
+        image: docker.io/s390x/busybox:latest
+        command:
+          - "sh"
+          - "-c"
+          - "while true; do echo "This is sample busybox application"; sleep 6000 ; done"
